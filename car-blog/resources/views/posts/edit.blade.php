@@ -8,38 +8,49 @@
         @method('PATCH')
         <div class="row">
             <div class="col-8 offset-2">
-
-                <div class="row">
-                    <h1>EDIT POST</h1>
-                </div>
+                <h1 class="text-center">Edit your post.</h1>
                 <div class="form-group row">
-                    <label for="caption" class="col-md-4 col-form-label ">Post Caption</label>
+                    <div class="col-lg-6 offset-lg-3 pb-2">
+                        <input id="title" type="text"
+                               class="form-control @error('title') is-invalid @enderror" name="title"
+                               value="{{ $post->title }}" autocomplete="title" autofocus placeholder="Title">
 
-                    <input id="caption" type="username" class="form-control @error('caption') is-invalid @enderror"
-                           name="caption" value="{{ old('caption') ?? $post->caption}}" required autocomplete="caption">
+                        @error('title')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
 
-                    @error('caption')
+                    <div class="col-lg-8 offset-lg-2 pb-2">
+                        <textarea id="text" class="form-control @error('text') is-invalid @enderror"
+                                  name="text"
+                                  value="{{ old('text') }}" autocomplete="text" autofocus rows="5"
+                                  placeholder="Post Text">{{$post->text}}</textarea>
+                        @error('text')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
 
-                    <strong>{{ $message }}</strong>
-
-                    @enderror
-                </div>
-
-                <div class="row">
-                    <label for="image" class="col-md-4 col-form-label ">Post Image</label>
-                    <input type="file" class="form-control-file" id="image" name="image">
-
+                    <div class="col-lg-6 offset-lg-3 input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="image" name="image">
+                            <label class="custom-file-label" for="image">Choose a image</label>
+                        </div>
+                    </div>
                     @error('image')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    <div class="w-100 text-center text-danger"><strong >{{ $message }}</strong></div>
                     @enderror
-                </div>
 
-                <div class="row pt-5">
-                    <button class="btn btn-primary">Update Post</button>
+                    <div class="col-lg-12 d-flex justify-content-center pt-2">
+                        <button type="submit" class="btn btn-dark left">Submit</button>
+                    </div>
                 </div>
-
             </div>
         </div>
     </form>

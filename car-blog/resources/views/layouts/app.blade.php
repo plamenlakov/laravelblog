@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex" href="{{ url('/laravel') }}">
+                <a class="navbar-brand d-flex" href="{{ url('/home') }}">
                     <div id="carBlogLogo"><img src="{{url('/images/carBlogLogo.png')}}" style="height:20px;" class="pr-2" alt="CarBlogLogo"/></div>
                     <div class="pt-1">CarBlog</div>
                 </a>
@@ -57,13 +57,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">My Profile</a>
+                                    <a class="dropdown-item" href="{{ url('/account') }}">Account Settings</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ url('/account') }}"> Account </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -20,17 +21,19 @@ class PostsController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'caption' => 'required',
+            'title' => 'required',
+            'text' => 'required',
             'image' => ['required', 'image'],
         ]);
 
         $imagePath = request('image')->store('uploads', 'public');
 
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
-        $image->save();
+        $thumbnail = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
+        $thumbnail->save();
 
         auth()->user()->posts()->create([
-            'caption' => $data['caption'],
+            'title' => $data['title'],
+            'text' => $data['text'],
             'image' => $imagePath,
         ]);
 
@@ -51,7 +54,8 @@ class PostsController extends Controller
     public function update(\App\Post $post)
     {
         $data = request()->validate([
-            'caption' => 'required',
+            'title' => 'required',
+            'text' => 'required',
             'image' => '',
         ]);
 
@@ -73,5 +77,11 @@ class PostsController extends Controller
 
 
         return redirect("/post/{$post -> id}");
+    }
+
+    public function destroy(\App\Post $post)
+    {
+        $post->delete();
+        return redirect('/home');
     }
 }

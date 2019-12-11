@@ -2,33 +2,21 @@
 
 @section('content')
 <div class="container">
-    <div id="DashboardImage" class="row d-flex">
-        <img src="{{url('/images/ferrari.png')}}" alt="ferrari">
+    <div class="row">
+        <div class="col-3">
+            <img src="{{$user->profile->image}}"
+                 class="rounded-circle p-3 w-100">
+        </div>
+        <div class="col-9 pt-5">
+            <h1><strong>{{$user->name}}</strong></h1>
+
+            <h4>{{$user->profile->title}}</h4>
+            <p>{{$user->profile->bio}}</p>
+        </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Welcome back {{ $user->username ?? 'N/A' }}!</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-{{--                        <div><a href="/profile/{{$user -> id}}/edit">Edit Profile</a></div>--}}
-
-                        <div>Title:  {{$user->profile->title ?? 'N/A'}}</div>
-
-                        <div>Bio:  {{$user->profile->bio ?? 'N/A'}}</div>
-
-                        <div>{{$user->posts->count()}} Posts</div>
-
-                        <div><a href="/post/create">Add new post</a></div>
-
-                </div>
-            </div>
+    <div class="container">
+        <div class="row p-3 mb-2 mt-5 flex-row-reverse">
+            <a href="/post/create"><button type="button" class="btn btn-dark left">Add Post</button></a>
         </div>
     </div>
     <div class="row pt-5 mb-5">
@@ -36,13 +24,11 @@
         @foreach($user->posts as $post)
             <div class="col-4 pb-4">
                 <a href="/post/{{$post -> id}}">
-                    <img src="/storage/{{$post -> image }}" class="w-100 h-100" alt="postImage">
+                    <img src="/storage/{{$post -> image }}" class="w-100 pb-1" alt="postImage">
                 </a>
-
+                <h4>{{$post -> title}}</h4>
             </div>
         @endforeach
-
-
 
     </div>
 </div>
