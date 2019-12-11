@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
@@ -16,6 +17,15 @@ class PostsController extends Controller
     public function create()
     {
         return view('posts.create');
+    }
+
+    public function dashboard()
+    {
+        $posts = Post::all()->reverse();
+
+        return view('posts.dashboard',[
+            'posts' => $posts
+        ]);
     }
 
     public function store()
@@ -82,6 +92,10 @@ class PostsController extends Controller
     public function destroy(\App\Post $post)
     {
         $post->delete();
-        return redirect('/home');
+        if(Auth::user()->is_admin){
+            return redirect('/dashboard');
+        }else{
+            return redirect('/home');
+        }
     }
 }

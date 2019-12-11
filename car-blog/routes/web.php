@@ -35,3 +35,5 @@ Route::get('/post/{post}', 'PostsController@show');
 Route::get('/post/{post}/edit', 'PostsController@edit')->name('post.edit'); //
 Route::patch('/post/{post}', 'PostsController@update')->name('post.update');
 Route::delete('/post/{post}', 'PostsController@destroy')->name('post.destroy');
+
+Route::get('/dashboard', 'PostsController@dashboard');
