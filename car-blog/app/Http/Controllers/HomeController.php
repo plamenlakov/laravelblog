@@ -30,4 +30,13 @@ class HomeController extends Controller
             'posts' => $posts
         ]);
     }
+
+    public function dashboard()
+    {
+        $posts = Post::all()->reverse();
+
+        return view('adminDashboard',[
+            'posts' => $posts
+        ]);
+    }
 }

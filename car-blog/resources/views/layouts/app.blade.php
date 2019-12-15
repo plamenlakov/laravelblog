@@ -58,6 +58,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">My Profile</a>
+                                    @can('isAdmin')
+                                        <a class="dropdown-item" href="/adminDashboard">Admin Dashboard</a>
+                                    @endcan
                                     <a class="dropdown-item" href="{{ url('/account') }}">Account Settings</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

@@ -10,13 +10,13 @@
             <div class="col-8 offset-2">
 
                 <div class="row">
-                    <h1>EDIT ACCOUNT</h1>
+                    <h1>Edit Profile</h1>
                 </div>
                 <div class="form-group row">
                     <label for="title" class="col-md-4 col-form-label ">Title</label>
 
                     <input id="title" type="text" class="form-control @error('title') is-invalid @enderror"
-                           name="title" value="{{ '' ?? $user->profile->title }}" required autocomplete="title">
+                           name="title" value=" {{ Auth::user()->profile->title }}" required autocomplete="title">
 
                     @error('title')
 
@@ -29,7 +29,7 @@
                     <label for="bio" class="col-md-4 col-form-label ">Bio</label>
 
                     <input id="bio" type="text" class="form-control @error('bio') is-invalid @enderror"
-                           name="bio" value="{{ '' ?? $user->profile->bio }}" required autocomplete="bio">
+                           name="bio" value="{{ Auth::user()->profile->bio }}" required autocomplete="bio">
 
                     @error('bio')
 
@@ -38,6 +38,7 @@
                     @enderror
                 </div>
 
+                {{--Change profile image--}}
                 <div class="row">
                     <label for="image" class="col-md-4 col-form-label pb-5">Profile Image</label>
                     <input type="file" class="form-control-file" id="image" name="image">

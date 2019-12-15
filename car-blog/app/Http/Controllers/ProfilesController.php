@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Intervention\Image\Facades\Image;
 
 class ProfilesController extends Controller
 {
@@ -25,10 +26,29 @@ class ProfilesController extends Controller
     {
         $data = request()->validate([
             'title' => 'required',
-            'bio' => 'required'
+            'bio' => 'required',
+            'image' => '',
         ]);
 
-        $user->profile->update($data);
+//        $user->profile->update($data);
+//
+//        return redirect("/profile/{$user -> id}");
+
+
+        if (request('image')){
+            $imagePath = request('image')->store('uploads', 'public');
+
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
+            $image->save();
+
+            $user->profile->update(array_merge(
+                $data,
+                ['image' => $imagePath]
+            ));
+        }
+        else{
+            $user->profile->update($data);
+        }
 
         return redirect("/profile/{$user -> id}");
     }

@@ -115,7 +115,7 @@
   <component name="ProjectId" id="1U50t2Qxv2ZXMqPTYPc25zTPdBH" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/posts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -160,6 +160,7 @@
       <workItem from="1574635191233" duration="9000" />
       <workItem from="1574675491138" duration="5515000" />
       <workItem from="1575222119559" duration="43281000" />
+      <workItem from="1576426219299" duration="14201000" />
     </task>
     <servers />
   </component>

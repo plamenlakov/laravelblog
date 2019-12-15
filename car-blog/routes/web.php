@@ -15,6 +15,12 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/adminDashboard', 'HomeController@dashboard')->name('adminDashboard')->middleware('can:isAdmin');
+
+Route::get('/account', function(){
+    return view('account');
+});
+
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
@@ -22,6 +28,6 @@ Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.upda
 Route::post('/post', 'PostsController@store')->name('post.create');
 Route::get('/post/create', 'PostsController@create');
 Route::get('/post/{post}', 'PostsController@show');
-Route::get('/post/{post}/edit', 'PostsController@edit')->name('post.edit'); //
+Route::get('/post/{post}/edit', 'PostsController@edit')->name('post.edit');
 Route::patch('/post/{post}', 'PostsController@update')->name('post.update');
 Route::delete('/post/{post}', 'PostsController@destroy')->name('post.destroy');
