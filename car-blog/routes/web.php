@@ -11,19 +11,9 @@
 |
 */
 
-
-
-Route::get('/', function(){
-    return view('welcome');
-});
-
-Route::get('/account', function(){
-    return view('account');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
@@ -35,5 +25,3 @@ Route::get('/post/{post}', 'PostsController@show');
 Route::get('/post/{post}/edit', 'PostsController@edit')->name('post.edit'); //
 Route::patch('/post/{post}', 'PostsController@update')->name('post.update');
 Route::delete('/post/{post}', 'PostsController@destroy')->name('post.destroy');
-
-Route::get('/dashboard', 'PostsController@dashboard');

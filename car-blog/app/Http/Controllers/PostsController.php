@@ -19,15 +19,6 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
-    public function dashboard()
-    {
-        $posts = Post::all()->reverse();
-
-        return view('posts.dashboard',[
-            'posts' => $posts
-        ]);
-    }
-
     public function store()
     {
         $data = request()->validate([
@@ -58,6 +49,8 @@ class PostsController extends Controller
 
     public function edit(\App\Post $post)
     {
+        $this->authorize('update', $post);
+
         return view ('posts.edit', compact('post'));
     }
 
@@ -91,11 +84,8 @@ class PostsController extends Controller
 
     public function destroy(\App\Post $post)
     {
+        $this->authorize('delete', $post);
+
         $post->delete();
-        if(Auth::user()->is_admin){
-            return redirect('/dashboard');
-        }else{
-            return redirect('/home');
-        }
     }
 }

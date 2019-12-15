@@ -16,12 +16,14 @@
             <form method="post" action="/post/{{$post->id}}/">
                 @csrf
                 @method('DELETE')
+                @can('update', $post)
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group mr-2" role="group" aria-label="First group">
                         <button type="button" class="btn btn-secondary"><a href="/post/{{$post->id}}/edit" class="btn text-white">Edit</a></button>
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </div>
                 </div>
+                @endcan
             </form>
 
         </div>

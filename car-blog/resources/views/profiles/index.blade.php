@@ -15,9 +15,11 @@
         </div>
     </div>
     <div class="container">
+        @if(auth()->check() && auth()->user()->id == $user->id)
         <div class="row p-3 mb-2 mt-5 flex-row-reverse">
             <a href="/post/create"><button type="button" class="btn btn-dark left">Add Post</button></a>
         </div>
+        @endif
     </div>
     <div class="row pt-5 mb-5">
 

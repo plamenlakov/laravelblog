@@ -27,7 +27,7 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
-        return 'profile/'.auth()->user()->id;
+        return route('home');
     }
 
     /**
