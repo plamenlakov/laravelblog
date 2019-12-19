@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-3">
-            <img src="{{$user->profile->image}}"
+            <img src="/storage/{{$user->profile->image}}"
                  class="rounded-circle p-3 w-100">
         </div>
         <div class="col-9 pt-5">
