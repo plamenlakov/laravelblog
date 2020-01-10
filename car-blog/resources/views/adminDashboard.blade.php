@@ -21,19 +21,15 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->user->username }}</td>
                 <td>{{ $post->created_at }}</td>
-                <td>
-                    {{-- <button type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>--}}
-
+                <td class="d-flex flex-row justify-content-start align-content-center">
                         <a href="/post/{{$post->id}}/edit">
-                            <button type="button" class="btn btn-success">Edit</button>
+                            <button type="button" class="btn btn-success mr-3">Edit</button>
                         </a>
 
                         <form action="/post/{{$post->id}}" method="POST">
                             @csrf
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-danger">Delete</button>
-
-
                         </form>
 
                 </td>

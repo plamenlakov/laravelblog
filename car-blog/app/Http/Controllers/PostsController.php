@@ -67,6 +67,7 @@ class PostsController extends Controller
             $imagePath = request('image')->store('uploads', 'public');
 
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
+            $image->insert('storage/watermark.png', 'bottom-left', 10, 100);
             $image->save();
 
             $post->update(array_merge(
@@ -87,6 +88,6 @@ class PostsController extends Controller
         $this->authorize('delete', $post);
 
         $post->delete();
-        return redirect("/");
+        return redirect()->back();
     }
 }

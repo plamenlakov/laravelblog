@@ -13,46 +13,27 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        factory(App\User::class, 5)->create()->each(function ($user) {
+            $user->posts()->save(factory(App\Post::class)->make());
+            $user->posts()->save(factory(App\Post::class)->make());
+        });
 
         $user = new User();
 
         $user->name = "admin";
         $user->email = 'admin@abv.bg';
-        $user->username = "admin123";
+        $user->username = "admin";
         $user->password = bcrypt('123456789');
         $user->role = 'admin';
         $user->save();
 
         $user = new User();
 
-        $user->name = "gosho";
-        $user->email = 'gosho@abv.bg';
-        $user->username = "gosho123";
-        $user->password = bcrypt('123456789');
-        $user->role = 'registered';
-        $user->save();
-
-
-        $user = new User();
-
-        $user->name = "mitko";
-        $user->email = 'mitko@abv.bg';
-        $user->username = "mitko123";
-        $user->password = bcrypt('123456789');
-        $user->role = 'registered';
-        $user->save();
-
-
-        $user = new User();
-
-        $user->name = "ivo";
-        $user->email = 'ivo@abv.bg';
-        $user->username = "ivo123";
+        $user->name = "editor";
+        $user->email = 'editor@abv.bg';
+        $user->username = "editor";
         $user->password = bcrypt('123456789');
         $user->role = 'editor';
         $user->save();
-
-
-
     }
 }

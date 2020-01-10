@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->reverse();
+        $posts = Post::with('user')->get()->reverse();
 
         return view('home',[
             'posts' => $posts
@@ -33,7 +33,7 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $posts = Post::all()->reverse();
+        $posts = Post::with('user')->get()->reverse();
 
         return view('adminDashboard',[
             'posts' => $posts
