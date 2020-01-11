@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Intervention\Image\Facades\Image;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProfilesController extends Controller
 {
@@ -20,6 +22,7 @@ class ProfilesController extends Controller
     public function edit(User $user)
     {
         return view('profiles.edit', compact('user'));
+
     }
 
     public function update(User $user)
@@ -38,7 +41,7 @@ class ProfilesController extends Controller
         if (request('image')){
             $imagePath = request('image')->store('uploads', 'public');
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(250,250);
-            $image->mask('storage/star.png');
+//            $image->mask('storage/star.png');
             $image->save();
 
             $user->profile->update(array_merge(
@@ -51,5 +54,9 @@ class ProfilesController extends Controller
         }
 
         return redirect("/profile/{$user -> id}");
+    }
+
+    public function export() {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 }

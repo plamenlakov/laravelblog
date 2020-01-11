@@ -6,6 +6,8 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\App;
 
 class PostsController extends Controller
 {
@@ -45,6 +47,7 @@ class PostsController extends Controller
     public function show(\App\Post $post)
     {
         return view('posts.show', compact('post'));
+       // return new PostResource($post);
     }
 
     public function edit(\App\Post $post)
@@ -89,5 +92,17 @@ class PostsController extends Controller
 
         $post->delete();
         return redirect()->back();
+    }
+
+    public function pdf()
+    {
+//        $pdf = PDF::loadView('pdf');
+//        return $pdf -> download('content.pdf');
+        $posts = Post::get();
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->setOptions(['isRemoteEnabled' => 'true']);
+        $pdf->loadView('pdf', compact('posts'));
+        return $pdf->stream();
     }
 }
