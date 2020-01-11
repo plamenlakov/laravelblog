@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
         factory(App\User::class, 5)->create()->each(function ($user) {
             $user->posts()->save(factory(App\Post::class)->make());
             $user->posts()->save(factory(App\Post::class)->make());
+            $user->profile()->update(factory(App\Profile::class)->make()->toArray());
         });
 
         $user = new User();
