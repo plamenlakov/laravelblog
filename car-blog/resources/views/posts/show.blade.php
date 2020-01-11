@@ -9,8 +9,8 @@
         </div>
         <div class="col-8">
             <div>
-                <h3>{{$post -> title}}</h3>
-                <p>{{$post -> text}}</p>
+                <h3 class="font-weight-bold">{{$post -> title}}</h3>
+                <p class="text-justify">{{$post -> text}}</p>
             </div>
 
             <form method="post" action="/post/{{$post->id}}/">

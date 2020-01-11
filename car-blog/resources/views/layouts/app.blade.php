@@ -7,14 +7,17 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Car Blog</title>
+    <link rel="icon"
+          type="image/png"
+          href="/storage/icon.png" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -23,9 +26,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex" href="{{ url('/') }}">
-                    <div id="carBlogLogo"><img src="{{url('/images/carBlogLogo.png')}}" style="height:20px;" class="pr-2" alt="CarBlogLogo"/></div>
-                    <div class="pt-1">CarBlog</div>
+                <a class="navbar-brand d-flex pb-0" href="{{ url('/') }}" style="border-bottom: 3px solid #3495e3">
+                    <div><img src="{{url('/images/carBlogLogo.png')}}" style="height:15px;" class="pr-1" alt="CarBlogLogo"/></div>
+                    <div class="font-weight-light"><span class="font-weight-bold">Car</span>Blog</div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

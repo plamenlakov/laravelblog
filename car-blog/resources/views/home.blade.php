@@ -10,9 +10,8 @@
                     </a>
                 </div>
                 <div class="col-8 d-flex justify-content-center flex-column">
-                    <h4>{{$post -> title}}</h4>
-                    <p>by <a href="/profile/{{$post->user->id}}">{{$post->user->username}}</a></p>
-                    <p>{{$post -> created_at -> format('m/d/Y')}}</p>
+                    <h4 class="font-weight-bold m-0">{{$post -> title}}</h4>
+                    <p class="font-weight-light">by <a href="/profile/{{$post->user->id}}">{{$post->user->username}}</a> on {{$post -> created_at -> format('M d, Y - H:i')}}</p>
                     <p>
                         {{ Str::limit(strip_tags($post->text), 500) }}
                         @if (strlen(strip_tags($post->text)) > 500)

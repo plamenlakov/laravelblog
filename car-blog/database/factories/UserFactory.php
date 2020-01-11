@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Post;
+use App\Profile;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -29,10 +30,17 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(Profile::class, function (Faker $faker){
+    return [
+        'title' => $faker->jobTitle,
+        'bio' => $faker->paragraphs(2, true),
+    ];
+});
+
 $factory->define(Post::class, function (Faker $faker) {
     return [
-        'title' => $faker->word,
-        'text' => $faker->paragraph,
+        'title' => $faker->sentence,
+        'text' => $faker->paragraphs(6, true),
         'image' => 'default_profile.png'
     ];
 });
