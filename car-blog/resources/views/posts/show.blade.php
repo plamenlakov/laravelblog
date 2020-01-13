@@ -20,7 +20,9 @@
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group mr-2" role="group" aria-label="First group">
                         <button type="button" class="btn btn-secondary"><a href="/post/{{$post->id}}/edit" class="btn text-white">Edit</a></button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        @can('delete', $post)
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        @endcan
                     </div>
                 </div>
                 @endcan

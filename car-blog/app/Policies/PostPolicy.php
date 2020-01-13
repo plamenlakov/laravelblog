@@ -53,7 +53,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        if($user->role == 'admin'){
+        if($user->role == 'admin' || $user->role = 'editor'){
             return true;
         } else {
             return $user->id == $post->user_id;
@@ -87,6 +87,7 @@ class PostPolicy
     {
         //
     }
+
 
     /**
      * Determine whether the user can permanently delete the post.

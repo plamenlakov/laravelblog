@@ -41,7 +41,7 @@ class ProfilesController extends Controller
         if (request('image')){
             $imagePath = request('image')->store('uploads', 'public');
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(250,250);
-//            $image->mask('storage/star.png');
+            $image->mask('storage/star.png');
             $image->save();
 
             $user->profile->update(array_merge(
@@ -57,6 +57,7 @@ class ProfilesController extends Controller
     }
 
     public function export() {
+        redirect()->back();
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 }

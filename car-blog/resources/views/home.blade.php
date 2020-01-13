@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="container">
+            @if(auth()->check())
+                <div class="d-flex flex-row justify-content-end">
+                    <a href="/pdf">
+                        <button type="button" class="btn btn-primary mb-3">Download Posts</button>
+                    </a>
+                </div>
+            @endif
         <div class="row">
             @foreach($posts as $post)
                 <div class="col-4 pb-4">

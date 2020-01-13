@@ -11,6 +11,9 @@
 |
 */
 
+use App\Http\Resources\PostResource;
+use App\Post;
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -24,7 +27,7 @@ Route::get('/account', function(){
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
-Route::get('/export', 'ProfilesController@export');
+Route::get('/export', 'ProfilesController@export')->middleware('can:isAdmin');
 
 
 Route::post('/post', 'PostsController@store')->name('post.create');
@@ -33,4 +36,10 @@ Route::get('/post/{post}', 'PostsController@show');
 Route::get('/post/{post}/edit', 'PostsController@edit')->name('post.edit');
 Route::patch('/post/{post}', 'PostsController@update')->name('post.update');
 Route::delete('/post/{post}', 'PostsController@destroy')->name('post.destroy');
+
+Route::get('/api/post/{post}', 'PostsController@showapi');
+Route::get('/api/posts', function () {
+    return PostResource::collection(Post::all());
+});
+
 Route::get('/pdf', 'PostsController@pdf');

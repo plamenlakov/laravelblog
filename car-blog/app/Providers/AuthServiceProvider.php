@@ -33,9 +33,9 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role == 'admin';
         });
 
-        // define a author user role
-        // returns true if user role is set to author
-        Gate::define('isAuthor', function($user) {
+        // define a editor user role
+        // returns true if user role is set to editor
+        Gate::define('isEditor', function($user) {
             return $user->role == 'editor';
         });
 

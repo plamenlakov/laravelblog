@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\Facades\Image;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\App;
@@ -32,6 +33,7 @@ class PostsController extends Controller
         $imagePath = request('image')->store('uploads', 'public');
 
         $thumbnail = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
+        $thumbnail->insert('storage/watermark.png', 'bottom-left', 10, 100);
         $thumbnail->save();
 
         auth()->user()->posts()->create([
@@ -44,10 +46,15 @@ class PostsController extends Controller
         return redirect('/profile/' . auth()->user()->id);
     }
 
+    public function showapi(\App\Post $post) : PostResource
+    {
+        return new PostResource($post);
+    }
+
+
     public function show(\App\Post $post)
     {
         return view('posts.show', compact('post'));
-       // return new PostResource($post);
     }
 
     public function edit(\App\Post $post)
@@ -89,15 +96,13 @@ class PostsController extends Controller
     public function destroy(\App\Post $post)
     {
         $this->authorize('delete', $post);
-
         $post->delete();
-        return redirect()->back();
+
+        return redirect("/");
     }
 
     public function pdf()
     {
-//        $pdf = PDF::loadView('pdf');
-//        return $pdf -> download('content.pdf');
         $posts = Post::get();
 
         $pdf = App::make('dompdf.wrapper');

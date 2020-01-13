@@ -3,6 +3,9 @@
 @section('content')
     @can('isAdmin')
 <div class="container">
+    <a href="/export">
+        <button type="button" class="btn btn-primary mb-3">Download Users</button>
+    </a>
     <table class="table table-hover ">
         <thead class="thead-dark">
         <tr>
